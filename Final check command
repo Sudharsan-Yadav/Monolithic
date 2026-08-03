@@ -1,1 +1,0 @@
-ansible -i /opt/ansible/inventory/aws_ec2.yml all -u ec2-user --private-key /etc/ansible/Krishav.pem -m ping

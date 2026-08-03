@@ -1,0 +1,25 @@
+Points to be remember:
+
+Install git, ansible, python-pip, jenkins, terraform in the server
+
+pip install boto3
+
+In provider.tf, change the region accordingly
+
+In main.tf, change the AMI ID, Key pair, Subnet-IDs accordingly
+
+In s3.tf, first remove the backend code and change the bucket name. After first build, add again the backend code and change the bucket name.
+
+Create aws_ec2.yml file inside the /opt/ansible/inventory folder
+
+Inside /etc/ansible folder, create Krishav.pem file and give the below permissions
+chown jenkins:jenkins Krishav.pem
+chmod 400 Krishav.pem
+
+Create the ansible config file by using the below command
+ansible-config init --disabled > ansible.cfg
+
+Paste the ansible.cfg data from the github and delete the inventory in line no: 605
+
+Finally deploy the application and run the final check command
+ansible -i /opt/ansible/inventory/aws_ec2.yml all -u ec2-user --private-key /etc/ansible/Krishav.pem -m ping
