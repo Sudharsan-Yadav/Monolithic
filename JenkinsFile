@@ -1,0 +1,30 @@
+pipeline{
+    agent any
+    stages{
+        stage("Code"){
+            steps{
+                git branch: 'main', url: 'https://github.com/Sudharsan-Yadav/Monolithic.git'
+            }
+        }
+        stage("Init"){
+            steps{
+                sh 'echo -e "yes\n" | terraform init'
+            }
+        }
+        stage("Plan"){
+            steps{
+                sh "terraform plan"
+            }
+        }
+        stage("Apply"){
+            steps{
+                sh "terraform apply --auto-approve"
+            }
+        }
+        stage("Deploy"){
+            steps{
+                sh "ansible-playbook -i /opt/ansible/inventory/aws_ec2.yml /var/lib/jenkins/workspace/MyDeployment/ansible/deployment.yml"
+            }
+        }
+    }
+}
