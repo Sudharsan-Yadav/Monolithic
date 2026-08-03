@@ -23,3 +23,6 @@ Paste the ansible.cfg data from the github and delete the inventory in line no: 
 
 Finally deploy the application and run the final check command
 ansible -i /opt/ansible/inventory/aws_ec2.yml all -u ec2-user --private-key /etc/ansible/Krishav.pem -m ping
+
+Manual command for deployment:
+ansible]# ansible-playbook -i /opt/ansible/inventory/aws_ec2.yml -u ec2-user --private-key=/etc/ansible/Krishav.pem /var/lib/jenkins/workspace/MyDeployment/ansible/deployment.yml
